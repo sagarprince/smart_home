@@ -4,4 +4,4 @@ Flutter UI Challenge. I have picked Smart Home App design from <a href="https://
 I will try to implement it as close as I can, If you like ui implementation please give a star to support me!
 
 ## Preview
-<video src="https://github.com/sagarprince/smart/blob/master/preview.mp4" width="480" height="800" controls preload></video>
+<video src="https://github.com/sagarprince/smart_home/blob/master/preview.mp4" width="480" height="800" controls preload></video>
