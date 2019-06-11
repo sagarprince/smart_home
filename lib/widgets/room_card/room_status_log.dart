@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:charcode/html_entity.dart' as html;
 
 class RoomStatusLog extends StatelessWidget {
 
@@ -33,7 +34,7 @@ class RoomStatusLog extends StatelessWidget {
                 ],
               ),
               SizedBox(width: 5.0),
-              Text('26C',
+              Text('26${String.fromCharCode(html.$deg)}C',
                   style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w600, color: Colors.white70))
             ],
           ),

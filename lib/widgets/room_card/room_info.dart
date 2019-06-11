@@ -9,13 +9,15 @@ class RoomInfo extends StatelessWidget {
   final bool isActive;
   final bool isExpanded;
   final EdgeInsets margin;
+  final VoidCallback onTap;
 
   const RoomInfo({Key key,
       @required this.room,
       this.isActive = false,
       this.isExpanded = false,
-      this.margin = const EdgeInsets.only(top: 90.0)}):
-      assert(room != null),
+      this.margin = const EdgeInsets.only(top: 90.0),
+      this.onTap
+  }): assert(room != null),
       super(key: key);
 
   @override
@@ -38,6 +40,7 @@ class RoomInfo extends StatelessWidget {
             image: room.image,
             onTap: () {
               Navigator.pushNamed(context, '/room', arguments: room.id);
+              onTap();
             },
             child: Stack(
               children: <Widget>[

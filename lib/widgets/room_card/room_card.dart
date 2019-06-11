@@ -127,6 +127,9 @@ class _RoomCardState extends State<RoomCard> with TickerProviderStateMixin {
                       isActive: widget.isActive,
                       isExpanded: isExpanded,
                       margin: cardMargin,
+                      onTap: () {
+                        _store.onRoomExpanded(currentPage, false);
+                      },
                     ),
                   ),
                 ],

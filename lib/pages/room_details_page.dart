@@ -6,6 +6,7 @@ import 'package:smart_home/widgets/room_heading.dart';
 import 'package:smart_home/widgets/room_details/device.dart';
 import 'package:smart_home/widgets/room_details/music_player.dart';
 import 'package:smart_home/widgets/room_details/device_controller.dart';
+import 'package:smart_home/widgets/room_details/air_conditioner_controller.dart';
 
 class RoomDetailsPage extends StatefulWidget {
   final Room room;
@@ -65,7 +66,7 @@ class _RoomDetailsPageState extends State<RoomDetailsPage> with SingleTickerProv
           child: Transform.translate(
             offset: Offset(0.0, _enterAnimations.deviceTranslation.value),
             child: Container(
-              padding: EdgeInsets.only(left: 10.0, right: 6.0),
+              padding: EdgeInsets.only(right: 6.0),
               child: const Device(
                 name: 'LAMP',
                 status: false,
@@ -80,7 +81,7 @@ class _RoomDetailsPageState extends State<RoomDetailsPage> with SingleTickerProv
           child: Transform.translate(
             offset: Offset(0.0, _enterAnimations.playerTranslation.value),
             child: Container(
-              padding: EdgeInsets.only(left: 6.0, right: 10.0),
+              padding: EdgeInsets.only(left: 6.0),
               child: const MusicPlayer(),
             ),
           ),
@@ -90,16 +91,20 @@ class _RoomDetailsPageState extends State<RoomDetailsPage> with SingleTickerProv
   }
 
   Widget _buildDeviceController() {
-    return Container(
-      padding: EdgeInsets.only(left: 6.0, right: 6.0),
-      child: Transform.translate(
-        offset: Offset(_enterAnimations.deviceControllerTranslation.value, 0.0),
-        child: const DeviceController(
-          status: true,
-          heading: 'PENDENT LAMP',
-          subHeading: 'Porchroom',
-        ),
+    return Transform.translate(
+      offset: Offset(_enterAnimations.deviceControllerTranslation.value, 0.0),
+      child: const DeviceController(
+        status: true,
+        heading: 'PENDENT LAMP',
+        subHeading: 'Porchroom',
       ),
+    );
+  }
+
+  Widget _buildAirConditionerController() {
+    return Transform.translate(
+      offset: Offset(_enterAnimations.airControllerTranslation.value, 0.0),
+      child: const AirConditionerController(),
     );
   }
 
@@ -108,13 +113,14 @@ class _RoomDetailsPageState extends State<RoomDetailsPage> with SingleTickerProv
       animation: _animationController,
       builder: (BuildContext context, Widget child) {
         return Container(
-          padding: EdgeInsets.only(bottom: 15.0),
+          padding: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 15.0),
           child: Column(
             children: <Widget>[
               _buildDevicePlayerRow(),
               const SizedBox(height: 25.0),
               _buildDeviceController(),
-              const SizedBox(height: 200),
+              const SizedBox(height: 25.0),
+              _buildAirConditionerController()
             ],
           ),
         );

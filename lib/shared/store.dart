@@ -14,26 +14,37 @@ class RoomStore {
   RoomStore({this.currentPage, this.isExpanded});
 }
 
+class AirConditionerStore {
+  final int temprature;
+  AirConditionerStore({this.temprature});
+}
+
 class Store {
   static final Store _singleton = Store._internal();
 
-  final StreamController<RoomsStore> roomsController = StreamController<RoomsStore>()
-    ..add(RoomsStore(
-        currentPage: 0,
-        room: AppData.rooms[0]
-      ));
+  final StreamController<RoomsStore> roomsController = StreamController<RoomsStore>();
+  final StreamController<RoomStore> roomController = StreamController<RoomStore>.broadcast();
+  final StreamController<AirConditionerStore> airConditionerController = StreamController<AirConditionerStore>.broadcast();
 
-  final StreamController<RoomStore> roomController = StreamController<RoomStore>.broadcast()
-      ..add(RoomStore(
-        currentPage: 0,
-        isExpanded: false
-      ));
+  final int temp = 30;
 
   factory Store() {
     return _singleton;
   }
 
-  Store._internal();
+  Store._internal() {
+    roomsController.sink.add(RoomsStore(
+        currentPage: 0,
+        room: AppData.rooms[0]
+    ));
+    roomController.sink.add(RoomStore(
+        currentPage: 0,
+        isExpanded: false
+    ));
+    airConditionerController.sink.add(AirConditionerStore(
+      temprature: temp,
+    ));
+  }
 
   onRoomChange(int page) {
     roomsController.sink.add(RoomsStore(
@@ -50,6 +61,12 @@ class Store {
     roomController.sink.add(RoomStore(
         currentPage: page,
         isExpanded: isExpanded
+    ));
+  }
+
+  onTempratureChange(int temp) {
+    airConditionerController.sink.add(AirConditionerStore(
+        temprature: temp,
     ));
   }
 }
